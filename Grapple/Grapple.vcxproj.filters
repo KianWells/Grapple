@@ -81,6 +81,9 @@
     <ClInclude Include="MainGame.h">
       <Filter>Source Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteC.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

@@ -3,3 +3,4 @@
 #include "TransformC.h"
 #include "PlayerInputC.h"
 #include "MovementC.h"
+#include "SpriteC.h"
