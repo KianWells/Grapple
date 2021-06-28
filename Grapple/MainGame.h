@@ -10,4 +10,5 @@ public:
 	void init() override;
 private:
 	void initPlayer();
+	void initAssets();
 };

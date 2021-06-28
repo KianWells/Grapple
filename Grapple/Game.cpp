@@ -42,10 +42,8 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 	}
 	entityManager = new EntityManager();
 
-	auto& player = entityManager->addEntity();
-	player.addComponent<TransformC>();
-	player.addComponent<MovementC>(3);
-	player.addComponent<PlayerInputC>();
+	gameScene = new MainGame(entityManager);
+	gameScene->init();
 }
 
 void Game::handleInputs()
