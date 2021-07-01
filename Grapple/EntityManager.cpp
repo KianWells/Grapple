@@ -28,9 +28,12 @@ void EntityManager::refresh()
 
 Entity& EntityManager::addEntity()
 {
-	Entity* e = new Entity();
+	Entity* e = new Entity(*this);
 	std::unique_ptr<Entity> uPtr{ e };
 	entities.emplace_back(std::move(uPtr));
 	return *e;
 }
 
+void EntityManager::addGroup(Entity& entity, Group g) {
+	groupedEntities[g].emplace_back(&entity);
+}

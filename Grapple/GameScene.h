@@ -12,6 +12,14 @@ public:
 
 	virtual void init() = 0;
 
+	enum groupLabels : std::size_t
+	{
+		groupMap,
+		groupPlayers,
+		groupColliders,
+		groupProjectiles
+	};
+
 protected:
 	EntityManager* entityManager;
 };

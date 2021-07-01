@@ -25,10 +25,6 @@ public:
 
     ~TransformC() {};
 
-    void update() override {
-        std::cout << position << std::endl;
-    }
-
 
     Vector2D position;
     Vector2D scale;

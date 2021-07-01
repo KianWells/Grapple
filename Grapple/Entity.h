@@ -5,9 +5,10 @@
 #include "Component.h"
 #include <iostream>
 
+class EntityManager;
 class Entity {
 public:
-    Entity() = default;
+    Entity(EntityManager& eManager) : manager(eManager) {}
     virtual ~Entity() = default;
 
     template<typename T, typename... TArgs>
@@ -40,6 +41,12 @@ public:
         return compBitset[getComponentTypeID<T>()];
     }
 
+    void addGroup(Group g);
+
+    bool inGroup(Group g) {
+        return groupBitset[g];
+    }
+
     void handleInput(SDL_Event& event) {
         for (auto& c : components) {
             c->handleInput(event);
@@ -62,5 +69,7 @@ private:
     std::vector<std::unique_ptr<Component>> components;
     ComponentArray compArr;
     ComponentBitset compBitset;
+    GroupBitset groupBitset;
+    EntityManager& manager;
     bool active;
 };

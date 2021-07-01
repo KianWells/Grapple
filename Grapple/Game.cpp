@@ -70,7 +70,12 @@ void Game::draw()
 {
 	SDL_RenderClear(renderer);
 
-	entityManager->draw();
+	for (auto t : entityManager->getGroup(gameScene->groupMap)) {
+		t->draw();
+	}
+	for (auto t : entityManager->getGroup(gameScene->groupPlayers)) {
+		t->draw();
+	}
 
 	SDL_RenderPresent(renderer);
 }

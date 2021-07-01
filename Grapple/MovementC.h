@@ -18,7 +18,6 @@ public:
 
 	void update() override {
 		transform->position = transform->position + velocity;
-		std::cout << velocity << std::endl;
 	}
 
 	Vector2D velocity;

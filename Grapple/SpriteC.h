@@ -11,11 +11,19 @@ public:
 		texture = Game::assets->getTexture(id);
 		width = w;
 		height = h;
+		src.x = src.y = 0;
+	}
+	
+	SpriteC(std::string id, int w, int h, int srcX, int srcY) {
+		texture = Game::assets->getTexture(id);
+		width = w;
+		height = h;
+		src.x = srcX;
+		src.y = srcY;
 	}
 
 	void init() override {
 		transform = &entity->getComponent<TransformC>();
-		src.x = src.y = 0;
 		src.w = width;
 		src.h = height;
 	}
