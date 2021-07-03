@@ -17,11 +17,15 @@ public:
 	void clean();
 	bool isRunning();
 
+	void positionCamera(int pX, int pY);
+
+	static SDL_Rect camera;
 	static SDL_Renderer* renderer;
 	static AssetManager* assets;
 private:
 	bool isRunning_;
 	SDL_Window* window;
+	SDL_Rect boundBox;
 	EntityManager* entityManager;
 	GameScene* gameScene;
 };

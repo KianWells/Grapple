@@ -31,8 +31,8 @@ public:
 	void update() override {
 		dest.w = width * transform->scale.x();
 		dest.h = height * transform->scale.y();
-		dest.x = transform->position.x();
-		dest.y = transform->position.y();
+		dest.x = static_cast<int>(transform->position.x()) - Game::camera.x;
+		dest.y = static_cast<int>(transform->position.y()) - Game::camera.y;
 	}
 
 	void draw() override {

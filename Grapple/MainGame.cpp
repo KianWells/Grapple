@@ -11,7 +11,7 @@ void MainGame::init() {
  
 void MainGame::initPlayer() {
 	auto& player(entityManager->addEntity());
-	player.addComponent<TransformC>(200,200,5,5);
+	player.addComponent<TransformC>(200,200);
 	player.addComponent<MovementC>(3);
 	player.addComponent<PlayerInputC>();
 	player.addComponent<SpriteC>("player", 32, 32);

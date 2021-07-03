@@ -15,12 +15,16 @@ public:
 		if (event.type == SDL_KEYDOWN) {
 			switch (event.key.keysym.sym) {
 			case SDLK_w:
+				movement->velocity.y() = -3;
 				break;
 			case SDLK_a:
+				movement->velocity.x() = -3;
 				break;
 			case SDLK_s:
+				movement->velocity.y() = 3;
 				break;
 			case SDLK_d:
+				movement->velocity.x() = 3;
 				break;
 			}
 
@@ -29,12 +33,16 @@ public:
 		if (event.type == SDL_KEYUP) {
 			switch (event.key.keysym.sym) {
 			case SDLK_w:
+				movement->velocity.y() = 0;
 				break;
 			case SDLK_a:
+				movement->velocity.x() = 0;
 				break;
 			case SDLK_s:
+				movement->velocity.y() = 0;
 				break;
 			case SDLK_d:
+				movement->velocity.x() = 0;
 				break;
 			}
 
