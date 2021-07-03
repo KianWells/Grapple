@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="ColliderC.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="ECS.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GlobalConsts.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MovementC.h" />
     <ClInclude Include="PlayerInputC.h" />

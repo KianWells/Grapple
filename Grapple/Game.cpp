@@ -7,6 +7,7 @@
 #include "MainGame.h"
 #include "GameScene.h"
 #include "Entity.h"
+#include "GlobalConsts.h"
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -78,10 +79,10 @@ void Game::draw()
 {
 	SDL_RenderClear(renderer);
 
-	for (auto t : entityManager->getGroup(gameScene->groupMap)) {
+	for (auto t : entityManager->getGroup(GlobalConsts::groupMap)) {
 		t->draw();
 	}
-	for (auto p : entityManager->getGroup(gameScene->groupPlayers)) {
+	for (auto p : entityManager->getGroup(GlobalConsts::groupPlayers)) {
 		p->draw();
 		
 		

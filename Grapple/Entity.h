@@ -4,8 +4,8 @@
 #include <memory>
 #include "Component.h"
 #include <iostream>
+#include "EntityManager.h"
 
-class EntityManager;
 class Entity {
 public:
     Entity(EntityManager& eManager) : manager(eManager) {}
@@ -39,6 +39,10 @@ public:
     template<typename T>
     inline bool hasComponent(){
         return compBitset[getComponentTypeID<T>()];
+    }
+
+    EntityManager& getManager() {
+        return manager;
     }
 
     void addGroup(Group g);

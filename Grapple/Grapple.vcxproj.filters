@@ -87,6 +87,12 @@
     <ClInclude Include="TODOS.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ColliderC.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalConsts.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
