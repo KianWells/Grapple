@@ -33,6 +33,7 @@ public:
 
     int width, height;
     Vector2D position;
+    Vector2D oldPosition;
     Vector2D scale;
     float rotation;
 };

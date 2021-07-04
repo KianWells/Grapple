@@ -17,6 +17,7 @@ public:
 	}
 
 	void update() override {
+		transform->oldPosition = transform->position;
 		transform->position = transform->position + velocity;
 	}
 

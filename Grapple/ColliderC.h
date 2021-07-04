@@ -28,7 +28,7 @@ public:
 		if (movingCollider) {
 			for (auto c : entity->getManager().getGroup(GlobalConsts::groupColliders)) {
 				if (AABBcheck(c->getComponent<ColliderC>()) == SDL_TRUE && c != entity) {
-					std::cout << "COLLISION" << std::endl;
+					transform->position = transform->oldPosition;
 				}
 			}
 		}
