@@ -9,6 +9,7 @@ public:
 		groupPlayers,
 		groupColliders,
 		groupProjectiles,
-		groupMovingCollider
+		groupMovingCollider,
+		groupBackground
 	};
 };

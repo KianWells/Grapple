@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="BackgroundC.h" />
     <ClInclude Include="ColliderC.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components.h" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Player.png" />
+    <Image Include="assets\ScrollingBackground.png" />
     <Image Include="assets\Tileset.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

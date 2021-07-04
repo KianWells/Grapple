@@ -93,6 +93,9 @@
     <ClInclude Include="GlobalConsts.h">
       <Filter>Source Files\include</Filter>
     </ClInclude>
+    <ClInclude Include="BackgroundC.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -125,6 +128,9 @@
       <Filter>Assets</Filter>
     </Image>
     <Image Include="assets\Tileset.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="assets\ScrollingBackground.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>

@@ -12,4 +12,5 @@ private:
 	void initPlayer();
 	void initAssets();
 	void initMap();
+	void initBackground();
 };

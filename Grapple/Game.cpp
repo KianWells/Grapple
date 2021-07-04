@@ -78,7 +78,9 @@ void Game::update()
 void Game::draw()
 {
 	SDL_RenderClear(renderer);
-
+	for (auto b : entityManager->getGroup(GlobalConsts::groupBackground)) {
+		b->draw();
+	}
 	for (auto t : entityManager->getGroup(GlobalConsts::groupMap)) {
 		t->draw();
 	}
@@ -133,10 +135,10 @@ void Game::positionCamera(int pX, int pY) {
 	if (camera.y < 0) {
 		camera.y = 0;
 	}
-	if (camera.x > camera.w) {
+	/*if (camera.x > camera.w) {
 		camera.x = camera.w;
 	}
 	if (camera.y > camera.h) {
 		camera.y = camera.h;
-	}
+	}*/
 }

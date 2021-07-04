@@ -5,3 +5,4 @@
 #include "MovementC.h"
 #include "SpriteC.h"
 #include "ColliderC.h"
+#include "BackgroundC.h"
