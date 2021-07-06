@@ -5,11 +5,11 @@
 
 class BackgroundC : public Component {
 public:
-	BackgroundC(std::string id, int w, int h) {
+	BackgroundC(std::string id) {
 		bg = Game::assets->getTexture(id);
 		src.x = src.y = 0;
-		src.w = w;
-		src.h = h;
+		src.w = Game::assets->getImage(id)->w;
+		src.h = Game::assets->getImage(id)->h;
 		std::cout << "created" << std::endl;
 	}
 

@@ -22,9 +22,9 @@ void MainGame::initPlayer() {
 }
 
 void MainGame::initAssets() {
-	Game::assets->addTexture("player", "assets/Player.png");
-	Game::assets->addTexture("tilemap", "assets/Tileset.png");
-	Game::assets->addTexture("background", "assets/ScrollingBackground.png");
+	Game::assets->addTexture("player", "assets/Player.png", 32, 32);
+	Game::assets->addTexture("tilemap", "assets/Tileset.png", 32, 32);
+	Game::assets->addTexture("background", "assets/ScrollingBackground.png", 200, 200);
 }
 
 void MainGame::initMap() {
@@ -46,5 +46,5 @@ void MainGame::initMap() {
 
 void MainGame::initBackground() {
 	auto& bg(entityManager->addEntity());
-	bg.addComponent<BackgroundC>("background", 200, 200);
+	bg.addComponent<BackgroundC>("background");
 }

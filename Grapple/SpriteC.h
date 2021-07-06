@@ -10,6 +10,8 @@ public:
 	SpriteC(std::string id) {
 		texture = Game::assets->getTexture(id);
 		src.x = src.y = 0;
+		src.w = Game::assets->getImage(id)->w;
+		src.h = Game::assets->getImage(id)->h;
 	}
 	
 	SpriteC(std::string id, int srcX, int srcY) {
@@ -25,13 +27,11 @@ public:
 		else {
 			transform = &entity->addComponent<TransformC>();
 		}
-		src.w = transform->width;
-		src.h = transform->height;
 	}
 
 	void update() override {
-		dest.w = transform->width * transform->scale.x();
-		dest.h = transform->height * transform->scale.y();
+		dest.w = src.w * transform->scale.x();
+		dest.h = src.h * transform->scale.y();
 		dest.x = static_cast<int>(transform->position.x()) - Game::camera.x;
 		dest.y = static_cast<int>(transform->position.y()) - Game::camera.y;
 	}

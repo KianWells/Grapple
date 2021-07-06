@@ -96,6 +96,9 @@
     <ClInclude Include="BackgroundC.h">
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Source Files\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

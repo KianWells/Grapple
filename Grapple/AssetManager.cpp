@@ -1,10 +1,13 @@
 #include "AssetManager.h"
-#include "TextureManager.h"
 
-void AssetManager::addTexture(std::string id, const char* path) {
-	textureMap.emplace(id, TextureManager::loadTexture(path));
+void AssetManager::addTexture(std::string id, const char* path, int w, int h) {
+	imageMap.emplace(id, new Image(path, w, h));
 }
 
 SDL_Texture* AssetManager::getTexture(std::string id) {
-	return textureMap.at(id);
+	return imageMap.at(id)->texture;
+}
+
+Image* AssetManager::getImage(std::string id) {
+	return imageMap.at(id);
 }
