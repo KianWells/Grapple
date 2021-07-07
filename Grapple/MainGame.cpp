@@ -18,11 +18,12 @@ void MainGame::initPlayer() {
 	player.addComponent<PlayerInputC>();
 	player.addComponent<SpriteC>("player");
 	player.addComponent<ColliderC>(true);
-	player.addComponent<GravityC>();
+	//player.addComponent<GravityC>();
 	player.addGroup(GlobalConsts::groupPlayers);
 }
 
 void MainGame::initAssets() {
+	Game::assets->addTexture("default", "assets/Player.png", 32, 32);
 	Game::assets->addTexture("player", "assets/Player.png", 32, 32);
 	Game::assets->addTexture("tilemap", "assets/Tileset.png", 32, 32);
 	Game::assets->addTexture("background", "assets/ScrollingBackground.png", 200, 200);
@@ -41,6 +42,8 @@ void MainGame::initMap() {
 		tileB.addGroup(GlobalConsts::groupMap);
 		tileT.addComponent<ColliderC>(false);
 		tileB.addComponent<ColliderC>(false);
+		tileT.addComponent<ScrollingC>();
+		tileB.addComponent<ScrollingC>();
 	}
 
 	auto& cTile(entityManager->addEntity());
@@ -51,6 +54,16 @@ void MainGame::initMap() {
 }
 
 void MainGame::initBackground() {
-	auto& bg(entityManager->addEntity());
-	bg.addComponent<BackgroundC>("background");
+	for (int x = 0; x < 2; x++) {
+		auto& bg(entityManager->addEntity());
+		bg.addComponent<TransformC>(x * Game::camera.w, 
+			0,
+			Game::camera.w / Game::assets->getImage("background")->w, 
+			Game::camera.h / Game::assets->getImage("background")->h, 
+			Game::assets->getImage("background")->w, 
+			Game::assets->getImage("background")->h);
+		bg.addComponent<SpriteC>("background");
+		bg.addGroup(GlobalConsts::groupBackground);
+		bg.addComponent<ScrollingC>();
+	}
 }

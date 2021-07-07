@@ -7,3 +7,4 @@
 #include "ColliderC.h"
 #include "BackgroundC.h"
 #include "GravityC.h"
+#include "ScrollingC.h"

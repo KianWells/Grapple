@@ -162,6 +162,7 @@
     <ClInclude Include="PlayerInputC.h" />
     <ClInclude Include="SpriteC.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="ScrollingC.h" />
     <ClInclude Include="TODOS.h" />
     <ClInclude Include="TransformC.h" />
     <ClInclude Include="Vector2D.h" />

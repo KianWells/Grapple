@@ -7,6 +7,8 @@
 
 class SpriteC : public Component {
 public:
+	friend class ScrollingC;
+
 	SpriteC(std::string id) {
 		texture = Game::assets->getTexture(id);
 		src.x = src.y = 0;
