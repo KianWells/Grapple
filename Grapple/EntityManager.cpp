@@ -24,6 +24,24 @@ void EntityManager::draw()
 
 void EntityManager::refresh()
 {
+	for (auto i(0u); i < MAX_GROUPS; i++)
+	{
+		auto& v(groupedEntities[i]);
+		v.erase(
+			std::remove_if(std::begin(v), std::end(v),
+				[i](Entity* mEntity)
+				{
+					return !mEntity->isActive() || !mEntity->inGroup(i);
+				}),
+			std::end(v));
+	}
+
+	entities.erase(std::remove_if(std::begin(entities), std::end(entities),
+		[](const std::unique_ptr<Entity>& mEntity)
+		{
+			return !mEntity->isActive();
+		}),
+		std::end(entities));
 }
 
 Entity& EntityManager::addEntity()

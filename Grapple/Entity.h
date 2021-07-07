@@ -69,11 +69,15 @@ public:
         }
     }
 
+    bool isActive() {
+        return active;
+    }
+
 private:
     std::vector<std::unique_ptr<Component>> components;
     ComponentArray compArr;
     ComponentBitset compBitset;
     GroupBitset groupBitset;
     EntityManager& manager;
-    bool active;
+    bool active = true;
 };

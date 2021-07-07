@@ -18,6 +18,7 @@ void MainGame::initPlayer() {
 	player.addComponent<PlayerInputC>();
 	player.addComponent<SpriteC>("player");
 	player.addComponent<ColliderC>(true);
+	player.addComponent<GravityC>();
 	player.addGroup(GlobalConsts::groupPlayers);
 }
 
@@ -28,14 +29,19 @@ void MainGame::initAssets() {
 }
 
 void MainGame::initMap() {
-	/*for (int x = 0; x < 20; x++) {
-		for (int y = 0; y < 20; y++) {
-			auto& tile(entityManager->addEntity());
-			tile.addComponent<TransformC>(x * 32, y * 32, 32, 32);
-			tile.addComponent<SpriteC>("tilemap");
-			tile.addGroup(GlobalConsts::groupMap);
-		}
-	}*/
+	std::cout << Game::camera.w << std::endl;
+	for (int x = 0; x < Game::camera.w*2/32; x++) {
+		auto& tileT(entityManager->addEntity());
+		auto& tileB(entityManager->addEntity());
+		tileT.addComponent<TransformC>(x * Game::assets->getImage("tilemap")->w, 0, Game::assets->getImage("tilemap")->w, Game::assets->getImage("tilemap")->h);
+		tileB.addComponent<TransformC>(x * Game::assets->getImage("tilemap")->w, Game::camera.h - Game::assets->getImage("tilemap")->h, Game::assets->getImage("tilemap")->w, Game::assets->getImage("tilemap")->h);
+		tileT.addComponent<SpriteC>("tilemap");
+		tileB.addComponent<SpriteC>("tilemap");
+		tileT.addGroup(GlobalConsts::groupMap);
+		tileB.addGroup(GlobalConsts::groupMap);
+		tileT.addComponent<ColliderC>(false);
+		tileB.addComponent<ColliderC>(false);
+	}
 
 	auto& cTile(entityManager->addEntity());
 	cTile.addComponent<TransformC>(60 * 32, 5 * 32, 32, 32);

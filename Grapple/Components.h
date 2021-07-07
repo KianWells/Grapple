@@ -6,3 +6,4 @@
 #include "SpriteC.h"
 #include "ColliderC.h"
 #include "BackgroundC.h"
+#include "GravityC.h"

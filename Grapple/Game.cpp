@@ -72,6 +72,7 @@ void Game::handleInputs()
 
 void Game::update()
 {
+	entityManager->refresh();
 	entityManager->update();
 }
 
