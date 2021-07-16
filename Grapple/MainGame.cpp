@@ -17,7 +17,8 @@ void MainGame::initPlayer() {
 	player.addComponent<MovementC>(3);
 	player.addComponent<PlayerInputC>();
 	player.addComponent<SpriteC>("player");
-	player.addComponent<ColliderC>(true);
+	player.addComponent<RayColliderC>();
+	//player.addComponent<ColliderC>(true);
 	//player.addComponent<GravityC>();
 	player.addGroup(GlobalConsts::groupPlayers);
 }

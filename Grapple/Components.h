@@ -8,3 +8,4 @@
 #include "BackgroundC.h"
 #include "GravityC.h"
 #include "ScrollingC.h"
+#include "RayColliderC.h"

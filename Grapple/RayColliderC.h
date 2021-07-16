@@ -1,12 +1,31 @@
 #pragma once
 
 #include "Component.h"
-#include "Vector2D.h"
-#include "SDL.h"
+#include "MovementC.h"
+#include "GlobalConsts.h"
+#include "ColliderC.h"
 
 class RayColliderC : public Component {
 public:
 	RayColliderC() {}
+	~RayColliderC() {}
+	void init() override {
+		transform = &entity->safeGetComponent<TransformC>();
+		movement = &entity->safeGetComponent<MovementC>();
+	}
+
+	void update() override {
+		int i = 0;
+		for (auto c : entity->getManager().getGroup(GlobalConsts::groupColliders)) {
+			if (c != entity) {
+				if (ResolveMovingRectVsRect(c->getComponent<ColliderC>().colliderBox)) {
+					std::cout << true << std::endl;
+				}
+				i++;
+			}
+		}
+		std::cout << i << std::endl;
+	}
 
 	bool RayVsRect(Vector2D& origin, Vector2D& direction, SDL_Rect& target, float& contactTime, Vector2D& contactPoint, Vector2D& normal) {
 		//initialise the return values to zero
@@ -72,4 +91,43 @@ public:
 		return true;
 	}
 
+	bool MovingRectVsRect(SDL_Rect& target, float& contactTime, Vector2D& contactPoint, Vector2D& normal) {
+		Vector2D origin(
+			transform->position.x + transform->width / 2,
+			transform->position.y + transform->height / 2
+		);
+		Vector2D velocity = movement->velocity;
+
+		if (velocity.x == 0 && velocity.y == 0)
+			return false;
+
+		SDL_Rect expandedTarget{};
+		expandedTarget.x -= transform->width / 2;
+		expandedTarget.y -= transform->height / 2;
+		expandedTarget.w += transform->width;
+		expandedTarget.h += transform->height;
+
+		if (RayVsRect(origin, velocity, expandedTarget, contactTime, contactPoint, normal)) {
+			return (contactTime >= 0.0f && contactTime < 1.0f);
+		}
+		
+		return false;
+	}
+
+	bool ResolveMovingRectVsRect(SDL_Rect& target) {
+		Vector2D contactPoint, normal;
+		float contactTime = 0.0f;
+		if (MovingRectVsRect(target, contactTime, normal, contactPoint))
+		{
+			movement->velocity.x += normal.x * std::abs(movement->velocity.x) * (1 - contactTime);
+			movement->velocity.y += normal.y * std::abs(movement->velocity.y) * (1 - contactTime);
+			return true;
+		}
+
+		return false;
+	}
+
+private:
+	TransformC* transform;
+	MovementC* movement;
 };
