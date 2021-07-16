@@ -13,7 +13,7 @@ void MainGame::init() {
  
 void MainGame::initPlayer() {
 	auto& player(entityManager->addEntity());
-	player.addComponent<TransformC>(200,200, 32, 32);
+	player.addComponent<TransformC>(400,400, 32, 32);
 	player.addComponent<MovementC>(3);
 	player.addComponent<PlayerInputC>();
 	player.addComponent<SpriteC>("player");
@@ -31,7 +31,7 @@ void MainGame::initAssets() {
 }
 
 void MainGame::initMap() {
-	std::cout << Game::camera.w << std::endl;
+	/*std::cout << Game::camera.w << std::endl;
 	for (int x = 0; x < Game::camera.w*2/32; x++) {
 		auto& tileT(entityManager->addEntity());
 		auto& tileB(entityManager->addEntity());
@@ -45,11 +45,11 @@ void MainGame::initMap() {
 		tileB.addComponent<ColliderC>(false);
 		tileT.addComponent<ScrollingC>();
 		tileB.addComponent<ScrollingC>();
-	}
+	}*/
 
 	auto& cTile(entityManager->addEntity());
-	cTile.addComponent<TransformC>(60 * 32, 5 * 32, 32, 32);
-	cTile.addComponent<SpriteC>("tilemap", 32, 0);
+	cTile.addComponent<TransformC>(6 * 32, 6 * 32, 32, 32);
+	cTile.addComponent<SpriteC>("tilemap");
 	cTile.addComponent<ColliderC>(false);
 	cTile.addGroup(GlobalConsts::groupMap);
 }

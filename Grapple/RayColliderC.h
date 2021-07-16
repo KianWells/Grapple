@@ -12,21 +12,47 @@ public:
 	void init() override {
 		transform = &entity->safeGetComponent<TransformC>();
 		movement = &entity->safeGetComponent<MovementC>();
+		velocity = { 100,100 };
 	}
+
+	int x, y;
+	Vector2D velocity;
+	bool hold;
 
 	void update() override {
-		int i = 0;
 		for (auto c : entity->getManager().getGroup(GlobalConsts::groupColliders)) {
 			if (c != entity) {
-				if (ResolveMovingRectVsRect(c->getComponent<ColliderC>().colliderBox)) {
-					std::cout << true << std::endl;
+				/*if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(1)) {
+					if (hold == false) {
+						hold = true;
+						transform->position.x = x;
+						transform->position.y = y;
+						Vector2D origin = { float(x), float(y) };
+						Vector2D cp, cn;
+						float ct;
+						std::cout << "Mouse Position: " << x << ", " << y << std::endl;
+						std::cout << "Velocity: " << velocity << std::endl;
+						if (MovingRectVsRect(c->getComponent<ColliderC>().colliderBox, ct, cp, cn)) {
+							std::cout << ct << ", " << cp << ", " << cn << std::endl;
+						}
+					}
+					
 				}
-				i++;
+				else{
+					hold = false;
+				}*/
+				ResolveMovingRectVsRect(c->getComponent<ColliderC>().colliderBox);
 			}
 		}
-		std::cout << i << std::endl;
 	}
 
+	void draw() override {
+		SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
+		SDL_RenderDrawLine(Game::renderer, x, y, x + velocity.x, y + velocity.y);
+		SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
+	}
+
+	//this is working
 	bool RayVsRect(Vector2D& origin, Vector2D& direction, SDL_Rect& target, float& contactTime, Vector2D& contactPoint, Vector2D& normal) {
 		//initialise the return values to zero
 		contactTime = 0.0f;
@@ -93,8 +119,8 @@ public:
 
 	bool MovingRectVsRect(SDL_Rect& target, float& contactTime, Vector2D& contactPoint, Vector2D& normal) {
 		Vector2D origin(
-			transform->position.x + transform->width / 2,
-			transform->position.y + transform->height / 2
+			transform->position.x + transform->width/2,
+			transform->position.y + transform->width/2
 		);
 		Vector2D velocity = movement->velocity;
 
@@ -102,10 +128,10 @@ public:
 			return false;
 
 		SDL_Rect expandedTarget{};
-		expandedTarget.x -= transform->width / 2;
-		expandedTarget.y -= transform->height / 2;
-		expandedTarget.w += transform->width;
-		expandedTarget.h += transform->height;
+		expandedTarget.x = target.x - transform->width / 2;
+		expandedTarget.y = target.y - transform->height / 2;
+		expandedTarget.w = target.w + transform->width;
+		expandedTarget.h = target. h + transform->height;
 
 		if (RayVsRect(origin, velocity, expandedTarget, contactTime, contactPoint, normal)) {
 			return (contactTime >= 0.0f && contactTime < 1.0f);
@@ -119,8 +145,9 @@ public:
 		float contactTime = 0.0f;
 		if (MovingRectVsRect(target, contactTime, normal, contactPoint))
 		{
-			movement->velocity.x += normal.x * std::abs(movement->velocity.x) * (1 - contactTime);
-			movement->velocity.y += normal.y * std::abs(movement->velocity.y) * (1 - contactTime);
+			movement->velocity.zeroes();
+			//movement->velocity.x += normal.x * std::abs(movement->velocity.x) * (1 - contactTime);
+			//movement->velocity.y += normal.y * std::abs(movement->velocity.y) * (1 - contactTime);
 			return true;
 		}
 
