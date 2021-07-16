@@ -12,7 +12,7 @@ public:
 	}
 
 	void update() override {
-		movement->velocity.y() = gravity;
+		movement->velocity.y = gravity;
 	}
 private:
 	float gravity = 3;

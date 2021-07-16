@@ -23,8 +23,8 @@ public:
 	}
 
 	void update() override {
-		if (Game::camera.x > sprite->dest.w + transform->position.x()) {
-			transform->position.x() += sprite->dest.w + Game::camera.w;
+		if (Game::camera.x > sprite->dest.w + transform->position.x) {
+			transform->position.x += sprite->dest.w + Game::camera.w;
 		}
 	}
 private:

@@ -32,10 +32,10 @@ public:
 	}
 
 	void update() override {
-		dest.w = src.w * transform->scale.x();
-		dest.h = src.h * transform->scale.y();
-		dest.x = static_cast<int>(transform->position.x()) - Game::camera.x;
-		dest.y = static_cast<int>(transform->position.y()) - Game::camera.y;
+		dest.w = src.w * transform->scale.x;
+		dest.h = src.h * transform->scale.y;
+		dest.x = static_cast<int>(transform->position.x) - Game::camera.x;
+		dest.y = static_cast<int>(transform->position.y) - Game::camera.y;
 	}
 
 	void draw() override {

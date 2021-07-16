@@ -89,8 +89,8 @@ void Game::draw()
 		p->draw();
 		
 		
-		int pX = p->getComponent<TransformC>().position.x();
-		int pY = p->getComponent<TransformC>().position.y();
+		int pX = p->getComponent<TransformC>().position.x;
+		int pY = p->getComponent<TransformC>().position.y;
 
 		positionCamera(pX, pY);
 	}

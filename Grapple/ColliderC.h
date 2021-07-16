@@ -15,16 +15,16 @@ public:
 		else {
 			transform = &entity->addComponent<TransformC>();
 		}
-		colliderBox.w = transform->width * transform->scale.x();
-		colliderBox.h = transform->height * transform->scale.y();
+		colliderBox.w = transform->width * transform->scale.x;
+		colliderBox.h = transform->height * transform->scale.y;
 		if (!entity->inGroup(GlobalConsts::groupColliders)) {
 			entity->addGroup(GlobalConsts::groupColliders);
 		}
 	}
 
 	void update() override{
-		colliderBox.x = transform->position.x();
-		colliderBox.y = transform->position.y();
+		colliderBox.x = transform->position.x;
+		colliderBox.y = transform->position.y;
 		if (movingCollider) {
 			for (auto c : entity->getManager().getGroup(GlobalConsts::groupColliders)) {
 				if (AABBcheck(c->getComponent<ColliderC>()) == SDL_TRUE && c != entity) {

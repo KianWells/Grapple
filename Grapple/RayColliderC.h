@@ -1,0 +1,75 @@
+#pragma once
+
+#include "Component.h"
+#include "Vector2D.h"
+#include "SDL.h"
+
+class RayColliderC : public Component {
+public:
+	RayColliderC() {}
+
+	bool RayVsRect(Vector2D& origin, Vector2D& direction, SDL_Rect& target, float& contactTime, Vector2D& contactPoint, Vector2D& normal) {
+		//initialise the return values to zero
+		contactTime = 0.0f;
+		contactPoint.zeroes();
+		normal.zeroes();
+
+		Vector2D invDir(1 / direction.x, 1 / direction.y);
+
+		//work out time near for x and y
+		Vector2D tNear(
+			(target.x - origin.x) * invDir.x,
+			(target.y - origin.y) * invDir.y
+		);
+
+		//work out time far for x and y
+		Vector2D tFar(
+			(target.x - origin.x + target.w) * invDir.x,
+			(target.y - origin.y + target.h) * invDir.y
+		);
+
+		if (std::isnan(tNear.x) || std::isnan(tNear.y)) return false;
+		if (std::isnan(tFar.x) || std::isnan(tFar.y)) return false;
+
+		// Sort distances
+		if (tNear.x > tFar.x) std::swap(tNear.x, tFar.x);
+		if (tNear.y > tFar.y) std::swap(tNear.y, tFar.y);
+
+		// Early rejection		
+		if (tNear.x > tFar.y || tNear.y > tFar.x) return false;
+
+		// Closest 'time' will be the first contact
+		contactTime = std::max(tNear.x, tNear.y);
+
+		// Furthest 'time' is contact on opposite side of target
+		float tContactFar = std::min(tFar.x, tFar.y);
+
+		// Reject if ray direction is pointing away from object
+		if (tContactFar < 0)
+			return false;
+
+		// Contact point of collision from parametric line equation
+		Vector2D intersectDir(
+			contactTime * direction.x,
+			contactTime * direction.y);
+
+		contactPoint = origin + intersectDir;
+
+		if (tNear.x > tNear.y)
+			if (invDir.x < 0)
+				normal = { 1, 0 };
+			else
+				normal = { -1, 0 };
+		else if (tNear.x < tNear.y)
+			if (invDir.y < 0)
+				normal = { 0, 1 };
+			else
+				normal = { 0, -1 };
+
+		// Note if tNear == tFar, collision is principly in a diagonal
+		// so pointless to resolve. By returning a CN={0,0} even though its
+		// considered a hit, the resolver wont change anything.
+		return true;
+	}
+
+};

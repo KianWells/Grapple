@@ -105,6 +105,9 @@
     <ClInclude Include="ScrollingC.h">
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
+    <ClInclude Include="RayColliderC.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

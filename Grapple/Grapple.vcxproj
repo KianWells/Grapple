@@ -160,6 +160,7 @@
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MovementC.h" />
     <ClInclude Include="PlayerInputC.h" />
+    <ClInclude Include="RayColliderC.h" />
     <ClInclude Include="SpriteC.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ScrollingC.h" />
