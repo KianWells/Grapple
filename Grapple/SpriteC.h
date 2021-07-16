@@ -22,13 +22,12 @@ public:
 		src.y = srcY;
 	}
 
+	SpriteC() {
+		SpriteC("default");
+	}
+
 	void init() override {
-		if (entity->hasComponent<TransformC>()) {
-			transform = &entity->getComponent<TransformC>();
-		}
-		else {
-			transform = &entity->addComponent<TransformC>();
-		}
+		transform = &entity->safeGetComponent<TransformC>();
 	}
 
 	void update() override {

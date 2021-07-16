@@ -37,6 +37,15 @@ public:
     }
 
     template<typename T>
+    inline T& safeGetComponent() {
+        if (this->hasComponent<T>()) {
+            return this->getComponent<T>();
+        }
+        return this->addComponent<T>();
+    }
+
+
+    template<typename T>
     inline bool hasComponent(){
         return compBitset[getComponentTypeID<T>()];
     }

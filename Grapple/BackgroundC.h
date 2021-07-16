@@ -13,6 +13,10 @@ public:
 		std::cout << "created" << std::endl;
 	}
 
+	BackgroundC() {
+		BackgroundC("default");
+	}
+
 	void init() override {
 		entity->addGroup(GlobalConsts::groupBackground);
 		dest1.x = 0;

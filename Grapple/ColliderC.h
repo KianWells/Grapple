@@ -8,13 +8,12 @@ class ColliderC : public Component {
 public:
 	ColliderC(bool moving) : movingCollider(moving) {}
 
+	ColliderC() {
+		ColliderC(false);
+	}
+
 	void init() override {
-		if (entity->hasComponent<TransformC>()) {
-			transform = &entity->getComponent<TransformC>();
-		}
-		else {
-			transform = &entity->addComponent<TransformC>();
-		}
+		transform = &entity->safeGetComponent<TransformC>();
 		colliderBox.w = transform->width * transform->scale.x;
 		colliderBox.h = transform->height * transform->scale.y;
 		if (!entity->inGroup(GlobalConsts::groupColliders)) {

@@ -8,7 +8,7 @@ public:
 	GravityC() {}
 
 	void init() override {
-		movement = &entity->getComponent<MovementC>();
+		movement = &entity->safeGetComponent<MovementC>();
 	}
 
 	void update() override {

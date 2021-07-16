@@ -8,12 +8,17 @@ public:
 	MovementC(float maxSpeed) {
 		this->maxSpeed = maxSpeed;
 	}
+
+	MovementC() {
+		MovementC(0);
+	}
+
 	~MovementC(){}
 
 	void init() override {
 		velocity.zeroes();
 		acceleration = 0.1;
-		transform = &entity->getComponent<TransformC>();
+		transform = &entity->safeGetComponent<TransformC>();
 	}
 
 	void update() override {

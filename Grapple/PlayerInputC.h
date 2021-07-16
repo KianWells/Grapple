@@ -8,7 +8,7 @@ public:
 	~PlayerInputC() {}
 
 	void init() override {
-		movement = &entity->getComponent<MovementC>();
+		movement = &entity->safeGetComponent<MovementC>();
 	}
 
 	void handleInput(SDL_Event& event) override{

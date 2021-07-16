@@ -8,18 +8,8 @@ public:
 	ScrollingC() {}
 
 	void init() override {
-		if (entity->hasComponent<TransformC>()) {
-			transform = &entity->getComponent<TransformC>();
-		}
-		else {
-			transform = &entity->addComponent<TransformC>();
-		}
-		if (entity->hasComponent<SpriteC>()) {
-			sprite = &entity->getComponent<SpriteC>();
-		}
-		else {
-			sprite = &entity->addComponent<SpriteC>("default");
-		}
+		transform = &entity->safeGetComponent<TransformC>();
+		sprite = &entity->safeGetComponent<SpriteC>();
 	}
 
 	void update() override {
