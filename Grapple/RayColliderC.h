@@ -12,35 +12,17 @@ public:
 	void init() override {
 		transform = &entity->safeGetComponent<TransformC>();
 		movement = &entity->safeGetComponent<MovementC>();
-		velocity = { 100,100 };
 	}
 
 	int x, y;
-	Vector2D velocity;
 	bool hold;
 
 	void update() override {
 		for (auto c : entity->getManager().getGroup(GlobalConsts::groupColliders)) {
 			if (c != entity) {
-				/*if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(1)) {
-					if (hold == false) {
-						hold = true;
-						transform->position.x = x;
-						transform->position.y = y;
-						Vector2D origin = { float(x), float(y) };
-						Vector2D cp, cn;
-						float ct;
-						std::cout << "Mouse Position: " << x << ", " << y << std::endl;
-						std::cout << "Velocity: " << velocity << std::endl;
-						if (MovingRectVsRect(c->getComponent<ColliderC>().colliderBox, ct, cp, cn)) {
-							std::cout << ct << ", " << cp << ", " << cn << std::endl;
-						}
-					}
-					
+				if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(1)) {
+					movement->velocity = Vector2D((x - transform->position.x) / 20, (y - transform->position.y) / 20);
 				}
-				else{
-					hold = false;
-				}*/
 				ResolveMovingRectVsRect(c->getComponent<ColliderC>().colliderBox);
 			}
 		}
@@ -48,7 +30,6 @@ public:
 
 	void draw() override {
 		SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
-		SDL_RenderDrawLine(Game::renderer, x, y, x + velocity.x, y + velocity.y);
 		SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
 	}
 
@@ -143,11 +124,13 @@ public:
 	bool ResolveMovingRectVsRect(SDL_Rect& target) {
 		Vector2D contactPoint, normal;
 		float contactTime = 0.0f;
-		if (MovingRectVsRect(target, contactTime, normal, contactPoint))
+		if (MovingRectVsRect(target, contactTime, contactPoint, normal))
 		{
-			movement->velocity.zeroes();
-			//movement->velocity.x += normal.x * std::abs(movement->velocity.x) * (1 - contactTime);
-			//movement->velocity.y += normal.y * std::abs(movement->velocity.y) * (1 - contactTime);
+			//movement->velocity.zeroes();
+			std::cout << "Normal: " << normal << ", Velocity: " << movement->velocity << std::endl;
+			movement->velocity.x += std::abs(movement->velocity.x) * normal.x * (1 - contactTime);
+			movement->velocity.y += std::abs(movement->velocity.y) * normal.y * (1 - contactTime);
+			std::cout << "New Velocity: " << movement->velocity << std::endl;
 			return true;
 		}
 
