@@ -23,12 +23,10 @@ public:
 
 	void update() override {
 		transform->oldPosition = transform->position;
-		transform->position = transform->position + velocity;
+		transform->position += velocity;
 	}
-
 	Vector2D velocity;
 	float maxSpeed, acceleration;
-
 private:
 	TransformC* transform;
 };

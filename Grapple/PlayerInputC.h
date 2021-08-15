@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "MovementC.h"
-//TODO: fix issue with stopping and starting
+//TODO: fix this as it breaks the ray colliding
 class PlayerInputC : public Component {
 public:
 	PlayerInputC() {}
@@ -15,16 +15,16 @@ public:
 		if (event.type == SDL_KEYDOWN) {
 			switch (event.key.keysym.sym) {
 			case SDLK_w:
-				movement->velocity.y = -3;
+				movement->velocity.y = -1;
 				break;
 			case SDLK_a:
-				movement->velocity.x = -3;
+				movement->velocity.x = -1;
 				break;
 			case SDLK_s:
-				movement->velocity.y = 3;
+				movement->velocity.y = 1;
 				break;
 			case SDLK_d:
-				movement->velocity.x = 3;
+				movement->velocity.x = 1;
 				break;
 			}
 

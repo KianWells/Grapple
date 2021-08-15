@@ -10,6 +10,7 @@ public:
 	void init() override;
 private:
 	void initPlayer();
+	void initGrapple();
 	void initAssets();
 	void initMap();
 	void initBackground();

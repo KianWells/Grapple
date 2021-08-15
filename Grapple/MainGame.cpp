@@ -7,17 +7,18 @@
 void MainGame::init() {
 	initAssets();
 	initBackground();
-	initMap();
 	initPlayer();
+	initMap();
 }
  
 void MainGame::initPlayer() {
 	auto& player(entityManager->addEntity());
-	player.addComponent<TransformC>(400,400, 32, 32);
-	player.addComponent<MovementC>(3);
+	player.addComponent<TransformC>(200,400, 32, 32);
+	player.addComponent<RayColliderC>();
+	player.addComponent<GrappleMouseC>();
+	player.getComponent<MovementC>().maxSpeed = 3;
 	player.addComponent<PlayerInputC>();
 	player.addComponent<SpriteC>("player");
-	player.addComponent<RayColliderC>();
 	//player.addComponent<ColliderC>(true);
 	//player.addComponent<GravityC>();
 	player.addGroup(GlobalConsts::groupPlayers);
@@ -31,7 +32,7 @@ void MainGame::initAssets() {
 }
 
 void MainGame::initMap() {
-	/*std::cout << Game::camera.w << std::endl;
+	std::cout << Game::camera.w << std::endl;
 	for (int x = 0; x < Game::camera.w*2/32; x++) {
 		auto& tileT(entityManager->addEntity());
 		auto& tileB(entityManager->addEntity());
@@ -39,13 +40,13 @@ void MainGame::initMap() {
 		tileB.addComponent<TransformC>(x * Game::assets->getImage("tilemap")->w, Game::camera.h - Game::assets->getImage("tilemap")->h, Game::assets->getImage("tilemap")->w, Game::assets->getImage("tilemap")->h);
 		tileT.addComponent<SpriteC>("tilemap");
 		tileB.addComponent<SpriteC>("tilemap");
-		tileT.addGroup(GlobalConsts::groupMap);
-		tileB.addGroup(GlobalConsts::groupMap);
 		tileT.addComponent<ColliderC>(false);
 		tileB.addComponent<ColliderC>(false);
+		tileT.addGroup(GlobalConsts::groupMap);
+		tileB.addGroup(GlobalConsts::groupMap);
 		tileT.addComponent<ScrollingC>();
 		tileB.addComponent<ScrollingC>();
-	}*/
+	}
 
 	auto& cTile(entityManager->addEntity());
 	cTile.addComponent<TransformC>(6 * 32, 6 * 32, 32, 32);

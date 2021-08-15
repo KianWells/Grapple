@@ -4,6 +4,7 @@
 #include "MovementC.h"
 #include "GlobalConsts.h"
 #include "ColliderC.h"
+#include <algorithm>
 
 class RayColliderC : public Component {
 public:
@@ -18,14 +19,41 @@ public:
 	bool hold;
 
 	void update() override {
+		//for (auto c : entity->getManager().getGroup(GlobalConsts::groupColliders)) {
+		//	if (c != entity) {
+		//		if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(1)) {
+		//			movement->velocity = Vector2D(((x + Game::camera.x) - transform->position.x) / 20, ((y + Game::camera.y) - transform->position.y) / 20);
+		//		}
+		//		//ResolveMovingRectVsRect(c->getComponent<ColliderC>().colliderBox);
+		//	}
+		//}
+
+		// Sort collisions in order of distance
+		Vector2D cp, cn;
+		float t = 0, min_t = INFINITY;
+		std::vector<std::pair<SDL_Rect, float>> z;
+
+		// Work out collision point, add it to vector along with rect ID
 		for (auto c : entity->getManager().getGroup(GlobalConsts::groupColliders)) {
-			if (c != entity) {
-				if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(1)) {
-					movement->velocity = Vector2D((x - transform->position.x) / 20, (y - transform->position.y) / 20);
-				}
-				ResolveMovingRectVsRect(c->getComponent<ColliderC>().colliderBox);
+			if (MovingRectVsRect(c->getComponent<ColliderC>().colliderBox, t, cp, cn))
+			{
+				z.push_back({ c->getComponent<ColliderC>().colliderBox, t });
 			}
 		}
+		
+			
+		
+
+		// Do the sort
+		std::sort(z.begin(), z.end(), [](const std::pair<SDL_Rect, float>& a, const std::pair<SDL_Rect, float>& b)
+			{
+				return a.second < b.second;
+			});
+
+		// Now resolve the collision in correct order 
+		for (auto j : z)
+			ResolveMovingRectVsRect(j.first);
+
 	}
 
 	void draw() override {
@@ -33,7 +61,7 @@ public:
 		SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
 	}
 
-	//this is working
+	
 	bool RayVsRect(Vector2D& origin, Vector2D& direction, SDL_Rect& target, float& contactTime, Vector2D& contactPoint, Vector2D& normal) {
 		//initialise the return values to zero
 		contactTime = 0.0f;
@@ -127,16 +155,15 @@ public:
 		if (MovingRectVsRect(target, contactTime, contactPoint, normal))
 		{
 			//movement->velocity.zeroes();
-			std::cout << "Normal: " << normal << ", Velocity: " << movement->velocity << std::endl;
+			//std::cout << "Normal: " << normal << ", Velocity: " << movement->velocity << std::endl;
 			movement->velocity.x += std::abs(movement->velocity.x) * normal.x * (1 - contactTime);
 			movement->velocity.y += std::abs(movement->velocity.y) * normal.y * (1 - contactTime);
-			std::cout << "New Velocity: " << movement->velocity << std::endl;
+			//std::cout << "New Velocity: " << movement->velocity << std::endl;
 			return true;
 		}
 
 		return false;
 	}
-
 private:
 	TransformC* transform;
 	MovementC* movement;
