@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\SDLFILES\SDL2_image-2.0.5\include;C:\SDLFILES\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDLFILES\SDL2_image-2.0.5\lib\x64;C:\SDLFILES\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Programming Applications\SDLFILES\SDL2-2.0.16\include;C:\Programming Applications\SDLFILES\SDL2_image-2.0.5\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Programming Applications\SDLFILES\SDL2-2.0.16\lib\x64;C:\Programming Applications\SDLFILES\SDL2_image-2.0.5\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -118,12 +118,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SDLFILES\SDL2_image-2.0.5\include;C:\SDLFILES\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Programming Applications\SDLFILES\SDL2-2.0.16\include;C:\Programming Applications\SDLFILES\SDL2_image-2.0.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SDLFILES\SDL2_image-2.0.5\lib\x64;C:\SDLFILES\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Programming Applications\SDLFILES\SDL2-2.0.16\lib\x64;C:\Programming Applications\SDLFILES\SDL2_image-2.0.5\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
